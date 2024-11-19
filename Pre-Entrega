@@ -1,0 +1,40 @@
+productos_inventario = []
+
+while True:
+    print("\nMenú de Gestión de Productos Veganos Para Dietética")
+    print("1. Agregar producto al inventario")
+    print("2. Mostrar productos del inventario")
+    print("3. Salir")
+
+    opcion = input("Seleccioná una opción (1, 2, o 3): ")
+
+    if opcion == "1":
+        nombre_producto = input("Ingresá el nombre del producto: ")
+        cantidad_producto = int(input("Ingresá la cantidad del producto: "))
+
+        producto_existente = False
+        for producto in productos_inventario:
+            if producto[0] == nombre_producto:
+                producto[1][0] += cantidad_producto  # La cantidad sigue estando en una lista
+                producto_existente = True
+                print(f"Producto '{nombre_producto}' actualizado con nueva cantidad {producto[1][0]}.")
+                break
+
+        if not producto_existente:
+            productos_inventario.append((nombre_producto, [cantidad_producto]))  # La cantidad sigue siendo una lista
+            print(f"Producto '{nombre_producto}' con cantidad {cantidad_producto} agregado al inventario.")
+
+    elif opcion == "2":
+        if len(productos_inventario) == 0:
+            print("El inventario está vacío.")
+        else:
+            print("Productos en el inventario:")
+            for producto in productos_inventario:
+                print(f"Nombre: {producto[0]}, Cantidad: {producto[1][0]}")  # Accediendo a la cantidad en la lista
+
+    elif opcion == "3":
+        print("Estás saliendo del sistema. ¡Hasta la próxima!")
+        break
+
+    else:
+        print("Opción inválida. Probemos de nuevo.")
